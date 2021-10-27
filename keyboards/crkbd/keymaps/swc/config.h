@@ -18,11 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-/* Select hand configuration */
+#ifdef KEYBOARD_crkbd_rev1_common
+#    undef USE_I2C
+#    define USE_SERIAL
+#endif
 
+#define USE_SERIAL_PD2
+
+/* Select hand configuration */
 #define MASTER_LEFT
 // #define MASTER_RIGHT
 // #define EE_HANDS
+
+#define TAPPING_TERM 150
+#define IGNORE_MOD_TAP_INTERRUPT
 
 #ifdef RGBLIGHT_ENABLE
 #    undef RGBLED_NUM
@@ -37,6 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define RGBLIGHT_VAL_STEP  17
 #endif
 
-#define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
+#define OLED_FONT_H "keyboards/crkbd/keymaps/swc/glcdfont.c"
+//#define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 5
