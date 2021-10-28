@@ -27,11 +27,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Select hand configuration */
 #define MASTER_LEFT
-// #define MASTER_RIGHT
+// #define MASTER_RIGHTUI
 // #define EE_HANDS
 
-#define TAPPING_TERM 150
 #define IGNORE_MOD_TAP_INTERRUPT
+#define TAPPING_TERM 150
+// #define TAPPING_FORCE_HOLD_PER_KEY
 
 #ifdef RGBLIGHT_ENABLE
 #    undef RGBLED_NUM
@@ -49,4 +50,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define OLED_FONT_H "keyboards/crkbd/keymaps/swc/glcdfont.c"
 //#define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
 
-#define DYNAMIC_KEYMAP_LAYER_COUNT 5
+#define DYNAMIC_KEYMAP_LAYER_COUNT 7
