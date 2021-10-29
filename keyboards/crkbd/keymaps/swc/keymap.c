@@ -168,7 +168,7 @@ void render_samus_logo(void) {
 }
 
 #    define KEYLOG_LEN 6
-char     keylog_str[KEYLOG_LEN] = {};
+char     keylog_str[KEYLOG_LEN] = "     ";
 uint8_t  keylogs_str_idx        = 0;
 uint16_t log_timer              = 0;
 
@@ -255,18 +255,10 @@ void render_mod_status(uint8_t modifiers) {
     oled_write_P(PSTR("     "), false);
     oled_write_P(PSTR("Mods:"), false);
     oled_write_P(PSTR(" "), false);
-    if (keymap_config.swap_lctl_lgui) {
-      oled_write_P(PSTR("C"), (modifiers & MOD_MASK_CTRL));
-      oled_write_P(PSTR("A"), (modifiers & MOD_MASK_ALT));
-      oled_write_P(PSTR("S"), (modifiers & MOD_MASK_SHIFT));
-      oled_write_P(PSTR("G"), (modifiers & MOD_MASK_GUI));
-    }
-    else {
-      oled_write_P(PSTR("G"), (modifiers & MOD_MASK_GUI));
-      oled_write_P(PSTR("A"), (modifiers & MOD_MASK_ALT));
-      oled_write_P(PSTR("S"), (modifiers & MOD_MASK_SHIFT));
-      oled_write_P(PSTR("C"), (modifiers & MOD_MASK_CTRL));
-    }
+    oled_write_P(PSTR("S"), (modifiers & MOD_MASK_SHIFT));
+    oled_write_P(PSTR("C"), (modifiers & MOD_MASK_CTRL));
+    oled_write_P(PSTR("A"), (modifiers & MOD_MASK_ALT));
+    oled_write_P(PSTR("G"), (modifiers & MOD_MASK_GUI));
 }
 
 void render_bootmagic_status(void) {
