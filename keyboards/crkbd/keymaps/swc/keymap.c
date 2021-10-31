@@ -53,7 +53,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_ALGUI MT(MOD_LGUI, KC_A)
 #define KC_SLALT MT(MOD_LALT, KC_S)
 #define KC_DLSFT MT(MOD_LSFT, KC_D)
-#define KC_BSPCSFT MT(MOD_LSFT, KC_BSPC)
+// #define KC_BSSFT MT(MOD_LSFT, KC_BSPC)
 #define KC_FLCTL MT(MOD_LCTL, KC_F)
 #define KC_JRCTL MT(MOD_RCTL, KC_J)
 #define KC_KRSFT MT(MOD_RSFT, KC_K)
@@ -81,57 +81,63 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define KC_ESCTL CTL_T(KC_ESC)
 
 // Layer Tap
-#define KC_ERAISE LT(4, KC_ENT)
-#define KC_SPCRSE LT(4, KC_SPC)
+#define KC_5CAPS LT(5, KC_CAPS)
+#define KC_4TAB LT(4, KC_CAPS)
+#define KC_3BSPC LT(3, KC_BSPC)
+#define KC_4SPC LT(4, KC_SPC)
+#define KC_4ENT LT(4, KC_ENT)
+
+#define KC_COP C(KC_C)
+#define KC_PST C(KC_V)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_3x6_3(
-       KC_TAB,     KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                           KC_Y,     KC_U,     KC_I,     KC_O,      KC_P,   KC_BSLS,
-     KC_ESCTL, KC_ALGUI, KC_SLALT, KC_DLSFT, KC_FLCTL,     KC_G,                           KC_H, KC_JRCTL, KC_KRSFT, KC_LRALT, KC_QTRGUI, KC_ERAISE,
-      KC_LSFT,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,                           KC_N,     KC_M,  KC_COMM,   KC_DOT,   KC_SLSH,   KC_RSFT,
-                                             KC_FKEYS, KC_LOWER, KC_BSPCSFT,   KC_SPCRSE, KC_LOWER, KC_FKEYS 
+      _______,     KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                              KC_Y,     KC_U,     KC_I,     KC_O,      KC_P,   _______,
+      _______, KC_ALGUI, KC_SLALT, KC_DLSFT, KC_FLCTL,     KC_G,                              KC_H, KC_JRCTL, KC_KRSFT, KC_LRALT, KC_QTRGUI,   _______,
+      _______,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,                              KC_N,     KC_M,  KC_COMM,   KC_DOT,   KC_SLSH,   _______,
+                                             KC_5CAPS,  KC_4TAB, KC_3BSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
   ),
   [_COLEMAK] = LAYOUT_split_3x6_3(
-      KC_TAB,   KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,      KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, KC_BSLS,
-      KC_ESCTL,    KC_ALGUI,    KC_RLALT,    KC_SLSFT,    KC_TLCTL,    KC_D,               KC_H,    KC_NRCTL,    KC_ERSFT,    KC_IRALT,KC_ORGUI,KC_ERAISE,
-    KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,               KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,
-                     KC_FKEYS, KC_LOWER, KC_BSPCSFT,   KC_SPCRSE, KC_LOWER, KC_FKEYS 
+      _______,     KC_Q,     KC_W,     KC_F,     KC_P,     KC_G,                              KC_J,     KC_L,     KC_U,     KC_Y,   KC_QUOT,   _______,
+      _______, KC_ALGUI, KC_RLALT, KC_SLSFT, KC_TLCTL,     KC_D,                              KC_H, KC_NRCTL, KC_ERSFT, KC_IRALT,  KC_ORGUI,   _______,
+      _______,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,                              KC_K,     KC_M,  KC_COMM,   KC_DOT,   KC_SLSH,   _______,
+                                            KC_5CAPS,   KC_4TAB, KC_3BSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
   ),
 
       // colemak DH
   [_COLEMAKDH] = LAYOUT_split_3x6_3(
-      KC_TAB,   KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,           KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, KC_BSLS,
-      KC_ESCTL,    KC_ALGUI,    KC_RLALT,    KC_SLSFT,    KC_TLCTL,    KC_G,               KC_M,    KC_NRCTL,    KC_ERSFT,    KC_IRALT,KC_ORGUI,KC_ERAISE,
-    KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,               KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,
-                     KC_FKEYS, KC_LOWER, KC_BSPCSFT,   KC_SPCRSE, KC_LOWER, KC_FKEYS 
+      _______,     KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,                              KC_J,     KC_L,     KC_U,     KC_Y,   KC_QUOT,   _______,
+      _______, KC_ALGUI, KC_RLALT, KC_SLSFT, KC_TLCTL,     KC_G,                              KC_M, KC_NRCTL, KC_ERSFT, KC_IRALT,  KC_ORGUI,   _______,
+      _______,     KC_Z,     KC_X,     KC_C,     KC_D,     KC_V,                              KC_K,     KC_H,  KC_COMM,   KC_DOT,   KC_SLSH,   _______,
+                                             KC_5CAPS,  KC_4TAB, KC_3BSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3(
-       KC_GRV,     KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                           KC_6,     KC_7,     KC_8,     KC_9,      KC_0,   KC_PSCR,
-      _______,  KC_LBRC,  KC_RBRC,   KC_DOT,  _______,  _______,                        KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,   KC_SCLN,   _______,
-      _______,  _______,  _______,  _______,  _______, KC_PAUSE,                       KC_SHINS,  KC_COLN,  KC_MINS,   KC_EQL,   KC_BSLS,   _______,
-                                              _______,  _______, KC_BSPC,     _______,  _______,   KC_ADJ 
+      _______,     KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                           KC_MRWD,  KC_MPLY,  KC_MFFD,  KC_MPRV,   KC_MNXT,   _______,
+      _______,  KC_LBRC,  KC_RBRC,   KC_DOT,  _______,  _______,                           KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,   KC_VOLUP,   _______,
+      _______,  _______,  _______,  _______,  _______, KC_PAUSE,                           KC_HOME,  KC_PGDN,  KC_PGUP,   KC_END,   KC_VOLDOWN, _______,
+                                              _______,  _______, KC_BSPC,        _______,  KC_MUTE,   KC_ADJ 
   ),
 
   [_RAISE] = LAYOUT_split_3x6_3(
-      KC_TILD,  KC_EXLM,    KC_AT,  KC_HASH,   KC_DLR,  KC_PERC,                        KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,   KC_RPRN,   _______,
-      _______,  KC_LCBR,  KC_RCBR,   KC_DOT,  KC_QUES,  _______,                        KC_HOME,  KC_PGDN,  KC_PGUP,   KC_END,   KC_COLN,   _______,
-      _______,  _______,  _______,  _______,  _______,  _______,                        _______,  _______,  KC_UNDS,  KC_PLUS,   KC_PIPE,   _______,
-                                              _______,  _______, _______,     _______,  _______,  _______ 
+      _______,  KC_PIPE,    KC_LT,    KC_GT,  KC_LCBR,  KC_RCBR,                           KC_SLSH,     KC_7,     KC_8,     KC_9,   KC_ASTR,   _______,
+      _______,  KC_BSLS,  KC_SLSH,   KC_DOT,  KC_LPRN,  KC_RPRN,                            KC_EQL,     KC_4,     KC_5,     KC_6,   KC_PLUS,   _______,
+      _______,   KC_GRV,  KC_TILD,  _______,  KC_LBRC,  KC_RBRC,                              KC_0,     KC_1,     KC_2,     KC_3,   KC_PIPE,   _______,
+                                              _______,  _______, _______,         KC_DOT,  KC_COMM,    TG(4) 
   ),
 
   [_FKEYS] = LAYOUT_split_3x6_3(
-       KC_F12,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,                        KC_PMNS,    KC_P7,    KC_P8,    KC_P9,    KC_F10,    KC_F11,
-      _______,  _______,  _______,  _______,  _______,  _______,                         KC_DLR,    KC_P4,    KC_P5,    KC_P6,   _______,   _______,
-      _______,  _______,  _______,  _______,  _______,  _______,                          KC_P0,    KC_P1,    KC_P2,    KC_P3,   _______,   _______,
-                                              _______,  _______, _______,     KC_PDOT,  KC_COMM,  _______ 
+      _______,  _______,  _______,  _______,  _______,  _______,                            KC_F12,    KC_F7,    KC_F8,    KC_F9,   _______,   _______,
+      _______,  _______,  _______,  _______,  _______,  _______,                            KC_F11,    KC_F4,    KC_F5,    KC_F6,   _______,   _______,
+      _______,  _______,  _______,  _______,  _______,  _______,                            KC_F10,    KC_F1,    KC_F2,    KC_F3,   _______,   _______,
+                                               KC_ADJ,  _______, _______,        _______,  _______,   KC_ADJ
   ),
 
   [_ADJUST] = LAYOUT_split_3x6_3(
-      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                        DF(0),   DF(1),   DF(2),  XXXXXXX,   XXXXXXX,   XXXXXXX,
-      KC_LTOG,  KC_LHUI,  KC_LSAI,  KC_LVAI,  XXXXXXX,  XXXXXXX,                        XXXXXXX,   KC_RST,  CG_TOGG,  XXXXXXX,   XXXXXXX,   XXXXXXX,
-      KC_LMOD,  KC_LHUD,  KC_LSAD,  KC_LVAD,  XXXXXXX,  XXXXXXX,                        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,
-                                              _______,  _______, _______,     _______,  _______,  _______ 
+      EEPR,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                             DF(0),    DF(1),    DF(2),  XXXXXXX,   XXXXXXX,    KC_RST,
+      KC_LTOG,  KC_LHUI,  KC_LSAI,  KC_LVAI,  XXXXXXX,  XXXXXXX,                           XXXXXXX,  CG_TOGG,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,
+      KC_LMOD,  KC_LHUD,  KC_LSAD,  KC_LVAD,  XXXXXXX,  XXXXXXX,                           XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,
+                                              _______,  _______, _______,        _______,  _______,  _______ 
   )
 };
 
@@ -149,6 +155,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //     }
 // }
 
+// KEY OVERRIDES
+const key_override_t esc_key_copy_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_ESCFK, KC_COP);
+const key_override_t tab_key_paste_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_TABLW, KC_PST);
+
+// This globally defines all key overrides to be used
+const key_override_t **key_overrides = (const key_override_t *[]){
+    &esc_key_copy_override,
+    &tab_key_paste_override,
+    NULL // Null terminate the array of overrides!
+};
+
+
+// COMBOS
+const uint16_t PROGMEM combo_caps_lock[] = {LSFT_T(KC_D), RSFT_T(KC_K), COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {
+    COMBO(combo_caps_lock , KC_CAPS)
+};
 #ifdef OLED_ENABLE
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -168,7 +191,7 @@ void render_samus_logo(void) {
 }
 
 #    define KEYLOG_LEN 6
-char     keylog_str[KEYLOG_LEN] = {};
+char     keylog_str[KEYLOG_LEN] = "     ";
 uint8_t  keylogs_str_idx        = 0;
 uint16_t log_timer              = 0;
 

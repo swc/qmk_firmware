@@ -6,6 +6,9 @@ OLED_DRIVER = SSD1306
 LTO_ENABLE = yes
 BOOTMAGIC_ENABLE = yes
 
+KEY_OVERRIDE_ENABLE = yes
+COMBO_ENABLE = yes
+
 OCEAN_DREAM_ENABLE = no
 LUNA_ENABLE = no # disabled so travis build succeeds
 
