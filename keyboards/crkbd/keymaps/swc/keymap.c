@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+#include <stdbool.h>
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -50,23 +51,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_LMOD  RGB_MOD
 
 // Home Row Mods
-#define KC_ALGUI MT(MOD_LGUI, KC_A)
-#define KC_SLALT MT(MOD_LALT, KC_S)
-#define KC_DLSFT MT(MOD_LSFT, KC_D)
+#define KC_SLGUI MT(MOD_LGUI, KC_S)
+#define KC_DLALT MT(MOD_LALT, KC_D)
 // #define KC_BSSFT MT(MOD_LSFT, KC_BSPC)
 #define KC_FLCTL MT(MOD_LCTL, KC_F)
 #define KC_JRCTL MT(MOD_RCTL, KC_J)
-#define KC_KRSFT MT(MOD_RSFT, KC_K)
-#define KC_LRALT MT(MOD_RALT, KC_L)
-#define KC_QTRGUI MT(MOD_RGUI, KC_QUOT)
+#define KC_KRALT MT(MOD_RALT, KC_K)
+#define KC_LRGUI MT(MOD_RGUI, KC_L)
 // Home row Colemak Mods
-#define KC_RLALT MT(MOD_LALT, KC_R)
-#define KC_SLSFT MT(MOD_LSFT, KC_S)
+#define KC_RLGUI MT(MOD_LGUI, KC_R)
+#define KC_SLALT MT(MOD_LALT, KC_S)
 #define KC_TLCTL MT(MOD_LCTL, KC_T)
 #define KC_NRCTL MT(MOD_RCTL, KC_N)
-#define KC_ERSFT MT(MOD_RSFT, KC_E)
-#define KC_IRALT MT(MOD_RALT, KC_I)
-#define KC_ORGUI MT(MOD_RGUI, KC_O)
+#define KC_ERALT MT(MOD_RALT, KC_E)
+#define KC_IRGUI MT(MOD_RGUI, KC_I)
 
 #define KC_RST   RESET
 
@@ -80,43 +78,48 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define KC_SHINS LSFT(KC_INS)
 // #define KC_ESCTL CTL_T(KC_ESC)
 
-// Layer Tap
-#define KC_5CAPS LT(5, KC_CAPS)
-#define KC_4TAB LT(4, KC_CAPS)
-#define KC_3BSPC LT(3, KC_BSPC)
+// Thumb clusters
+#define KC_5ESC LT(5, KC_ESC)
+#define KC_3TAB LT(3, KC_TAB)
+#define KC_SBSPC MT(MOD_LSFT, KC_BSPC)
 #define KC_4SPC LT(4, KC_SPC)
 #define KC_4ENT LT(4, KC_ENT)
 
+#define KC_CUT C(KC_X)
 #define KC_COP C(KC_C)
 #define KC_PST C(KC_V)
+
+#define KC_DF0 DF(0)
+#define KC_DF1 DF(1)
+#define KC_DF2 DF(2)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_3x6_3(
       _______,     KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                              KC_Y,     KC_U,     KC_I,     KC_O,      KC_P,   _______,
-      _______, KC_ALGUI, KC_SLALT, KC_DLSFT, KC_FLCTL,     KC_G,                              KC_H, KC_JRCTL, KC_KRSFT, KC_LRALT, KC_QTRGUI,   _______,
+      _______,     KC_A, KC_SLGUI, KC_DLALT, KC_FLCTL,     KC_G,                              KC_H, KC_JRCTL, KC_KRALT, KC_LRGUI,   KC_QUOT,   _______,
       _______,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,                              KC_N,     KC_M,  KC_COMM,   KC_DOT,   KC_SLSH,   _______,
-                                             KC_5CAPS,  KC_4TAB, KC_3BSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
+                                              KC_5ESC,  KC_3TAB, KC_SBSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
   ),
   [_COLEMAK] = LAYOUT_split_3x6_3(
       _______,     KC_Q,     KC_W,     KC_F,     KC_P,     KC_G,                              KC_J,     KC_L,     KC_U,     KC_Y,   KC_QUOT,   _______,
-      _______, KC_ALGUI, KC_RLALT, KC_SLSFT, KC_TLCTL,     KC_D,                              KC_H, KC_NRCTL, KC_ERSFT, KC_IRALT,  KC_ORGUI,   _______,
+      _______,     KC_A, KC_RLGUI, KC_SLALT, KC_TLCTL,     KC_D,                              KC_H, KC_NRCTL, KC_ERALT, KC_IRGUI,      KC_O,   _______,
       _______,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,                              KC_K,     KC_M,  KC_COMM,   KC_DOT,   KC_SLSH,   _______,
-                                            KC_5CAPS,   KC_4TAB, KC_3BSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
+                                              KC_5ESC,  KC_3TAB, KC_SBSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
   ),
 
       // colemak DH
   [_COLEMAKDH] = LAYOUT_split_3x6_3(
       _______,     KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,                              KC_J,     KC_L,     KC_U,     KC_Y,   KC_QUOT,   _______,
-      _______, KC_ALGUI, KC_RLALT, KC_SLSFT, KC_TLCTL,     KC_G,                              KC_M, KC_NRCTL, KC_ERSFT, KC_IRALT,  KC_ORGUI,   _______,
+      _______,     KC_A, KC_RLGUI, KC_SLALT, KC_TLCTL,     KC_G,                              KC_M, KC_NRCTL, KC_ERALT, KC_IRGUI,      KC_O,   _______,
       _______,     KC_Z,     KC_X,     KC_C,     KC_D,     KC_V,                              KC_K,     KC_H,  KC_COMM,   KC_DOT,   KC_SLSH,   _______,
-                                             KC_5CAPS,  KC_4TAB, KC_3BSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
+                                              KC_5ESC,  KC_3TAB, KC_SBSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3(
-      _______,     KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                           KC_MRWD,  KC_MPLY,  KC_MFFD,  KC_MPRV,   KC_MNXT,   _______,
-      _______,  KC_LBRC,  KC_RBRC,   KC_DOT,  _______,  _______,                           KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,   KC_VOLUP,   _______,
-      _______,  _______,  _______,  _______,  _______, KC_PAUSE,                           KC_HOME,  KC_PGDN,  KC_PGUP,   KC_END,   KC_VOLDOWN, _______,
-                                              _______,  _______, KC_BSPC,        _______,  KC_MUTE,   KC_ADJ 
+      _______,  _______,  _______,  _______,  _______,  _______,                           KC_MRWD,  KC_MPLY,  KC_MFFD,  KC_MPRV,   KC_MNXT,   _______,
+      _______,  KC_LBRC,  KC_RBRC,   KC_DOT,  _______,  _______,                           KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,   KC__VOLUP,   _______,
+      _______,  _______,  _______,  _______,  _______, KC_PAUSE,                           KC_HOME,  KC_PGDN,  KC_PGUP,   KC_END,   KC__VOLDOWN, _______,
+                                              _______,  _______, KC_SBSPC,       _______,  KC_MUTE,   KC_ADJ 
   ),
 
   [_RAISE] = LAYOUT_split_3x6_3(
@@ -134,9 +137,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_ADJUST] = LAYOUT_split_3x6_3(
-      EEPR,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                             DF(0),    DF(1),    DF(2),  XXXXXXX,   XXXXXXX,    KC_RST,
+      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                            KC_DF0,   KC_DF1,   KC_DF2,  XXXXXXX,   XXXXXXX,    KC_RST,
       KC_LTOG,  KC_LHUI,  KC_LSAI,  KC_LVAI,  XXXXXXX,  XXXXXXX,                           XXXXXXX,  CG_TOGG,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,
-      KC_LMOD,  KC_LHUD,  KC_LSAD,  KC_LVAD,  XXXXXXX,  XXXXXXX,                           XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,
+      KC_LMOD,  KC_LHUD,  KC_LSAD,  KC_LVAD,  XXXXXXX,  XXXXXXX,                           XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,   EEPROM_RESET,
                                               _______,  _______, _______,        _______,  _______,  _______ 
   )
 };
@@ -156,22 +159,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // }
 
 // KEY OVERRIDES
-const key_override_t esc_key_copy_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_ESCFK, KC_COP);
-const key_override_t tab_key_paste_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_TABLW, KC_PST);
+const key_override_t cut_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_5ESC, KC_CUT);
+const key_override_t copy_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_3TAB, KC_COP);
+const key_override_t paste_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_SBSPC, KC_PST);
+const key_override_t cut_override_mac = ko_make_basic(MOD_BIT(KC_LGUI), KC_5ESC, KC_CUT);
+const key_override_t copy_override_mac = ko_make_basic(MOD_BIT(KC_LGUI), KC_3TAB, KC_COP);
+const key_override_t paste_override_mac = ko_make_basic(MOD_BIT(KC_LGUI), KC_SBSPC, KC_PST);
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
-    &esc_key_copy_override,
-    &tab_key_paste_override,
+    &cut_override,
+    &copy_override,
+    &paste_override,
+    &cut_override_mac,
+    &copy_override_mac,
+    &paste_override_mac,
     NULL // Null terminate the array of overrides!
 };
 
 
 // COMBOS
-const uint16_t PROGMEM combo_caps_lock[] = {LSFT_T(KC_D), RSFT_T(KC_K), COMBO_END};
+const uint16_t PROGMEM combo_caps_lock[] = {KC_SBSPC, KC_4SPC, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo_caps_lock , KC_CAPS)
 };
+
 #ifdef OLED_ENABLE
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -281,14 +293,14 @@ void render_mod_status(uint8_t modifiers) {
     if (keymap_config.swap_lctl_lgui) {
       oled_write_P(PSTR("C"), (modifiers & MOD_MASK_CTRL));
       oled_write_P(PSTR("A"), (modifiers & MOD_MASK_ALT));
-      oled_write_P(PSTR("S"), (modifiers & MOD_MASK_SHIFT));
       oled_write_P(PSTR("G"), (modifiers & MOD_MASK_GUI));
+      oled_write_P(PSTR("S"), (modifiers & MOD_MASK_SHIFT));
     }
     else {
       oled_write_P(PSTR("G"), (modifiers & MOD_MASK_GUI));
       oled_write_P(PSTR("A"), (modifiers & MOD_MASK_ALT));
-      oled_write_P(PSTR("S"), (modifiers & MOD_MASK_SHIFT));
       oled_write_P(PSTR("C"), (modifiers & MOD_MASK_CTRL));
+      oled_write_P(PSTR("S"), (modifiers & MOD_MASK_SHIFT));
     }
 }
 
@@ -343,9 +355,32 @@ void oled_task_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    bool processNormally = true;
+
+    switch (keycode) {
+        case KC_DF0:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(0);
+            }
+            processNormally = false;
+            break;
+        case KC_DF1: 
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(1);
+            }
+            processNormally = false;
+            break;
+        case KC_DF2:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(2);
+            }
+            processNormally = false;
+            break;
+    }
+
     if (record->event.pressed) {
         add_keylog(keycode);
     }
-    return true;
+    return processNormally;
 }
 #endif // OLED_ENABLE
