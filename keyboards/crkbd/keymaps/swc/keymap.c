@@ -66,6 +66,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_ERALT MT(MOD_RALT, KC_E)
 #define KC_IRGUI MT(MOD_RGUI, KC_I)
 
+#define KC_SESC S(KC_ESC)
+#define KC_STAB S(KC_TAB)
+
 #define KC_RST   RESET
 
 // Mod Tap
@@ -79,11 +82,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define KC_ESCTL CTL_T(KC_ESC)
 
 // Thumb clusters
-#define KC_5ESC LT(5, KC_ESC)
+#define KC_4ESC LT(4, KC_ESC)
 #define KC_3TAB LT(3, KC_TAB)
 #define KC_SBSPC MT(MOD_LSFT, KC_BSPC)
 #define KC_4SPC LT(4, KC_SPC)
-#define KC_4ENT LT(4, KC_ENT)
+#define KC_3ENT LT(3, KC_ENT)
 
 #define KC_CUT C(KC_X)
 #define KC_COP C(KC_C)
@@ -93,18 +96,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_DF1 DF(1)
 #define KC_DF2 DF(2)
 
+#define KC_3LOCK TO(3)
+
+bool numLock = false;
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_3x6_3(
-      _______,     KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                              KC_Y,     KC_U,     KC_I,     KC_O,      KC_P,   _______,
+      _______,     KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,                              KC_Y,     KC_U,     KC_I,     KC_O,      KC_P,   KC_3LOCK,
       _______,     KC_A, KC_SLGUI, KC_DLALT, KC_FLCTL,     KC_G,                              KC_H, KC_JRCTL, KC_KRALT, KC_LRGUI,   KC_QUOT,   _______,
       _______,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,                              KC_N,     KC_M,  KC_COMM,   KC_DOT,   KC_SLSH,   _______,
-                                              KC_5ESC,  KC_3TAB, KC_SBSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
+                                              KC_4ESC,  KC_3TAB, KC_SBSPC,       KC_4SPC,  KC_3ENT, KC_FKEYS
   ),
   [_COLEMAK] = LAYOUT_split_3x6_3(
       _______,     KC_Q,     KC_W,     KC_F,     KC_P,     KC_G,                              KC_J,     KC_L,     KC_U,     KC_Y,   KC_QUOT,   _______,
       _______,     KC_A, KC_RLGUI, KC_SLALT, KC_TLCTL,     KC_D,                              KC_H, KC_NRCTL, KC_ERALT, KC_IRGUI,      KC_O,   _______,
       _______,     KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,                              KC_K,     KC_M,  KC_COMM,   KC_DOT,   KC_SLSH,   _______,
-                                              KC_5ESC,  KC_3TAB, KC_SBSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
+                                              KC_4ESC,  KC_3TAB, KC_SBSPC,       KC_4SPC,  KC_3ENT, KC_FKEYS
   ),
 
       // colemak DH
@@ -112,35 +119,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,     KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,                              KC_J,     KC_L,     KC_U,     KC_Y,   KC_QUOT,   _______,
       _______,     KC_A, KC_RLGUI, KC_SLALT, KC_TLCTL,     KC_G,                              KC_M, KC_NRCTL, KC_ERALT, KC_IRGUI,      KC_O,   _______,
       _______,     KC_Z,     KC_X,     KC_C,     KC_D,     KC_V,                              KC_K,     KC_H,  KC_COMM,   KC_DOT,   KC_SLSH,   _______,
-                                              KC_5ESC,  KC_3TAB, KC_SBSPC,       KC_4SPC,  KC_4ENT, KC_FKEYS
+                                              KC_4ESC,  KC_3TAB, KC_SBSPC,       KC_4SPC,  KC_3ENT, KC_FKEYS
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3(
-      _______,  _______,  _______,  _______,  _______,  _______,                           KC_MRWD,  KC_MPLY,  KC_MFFD,  KC_MPRV,   KC_MNXT,   _______,
-      _______,  KC_LBRC,  KC_RBRC,   KC_DOT,  _______,  _______,                           KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,   KC__VOLUP,   _______,
-      _______,  _______,  _______,  _______,  _______, KC_PAUSE,                           KC_HOME,  KC_PGDN,  KC_PGUP,   KC_END,   KC__VOLDOWN, _______,
-                                              _______,  _______, KC_SBSPC,       _______,  KC_MUTE,   KC_ADJ 
+      _______,  _______,  KC_CIRC,  KC_HASH,   KC_DLR,  KC_PERC,                           KC_SLSH,     KC_7,     KC_8,     KC_9,   KC_ASTR,   _______,
+      _______,  _______,  KC_MINS,  KC_EXLM,  KC_QUES,  KC_AMPR,                            KC_EQL,     KC_4,     KC_5,     KC_6,   KC_PLUS,   _______,
+      _______,  _______,  _______,    KC_AT,  KC_ASTR,  KC_PIPE,                              KC_0,     KC_1,     KC_2,     KC_3,   _______,   _______,
+                                              _______,  _______,  _______,        KC_DOT,  KC_COMM, KC_3LOCK
   ),
 
   [_RAISE] = LAYOUT_split_3x6_3(
-      _______,  KC_PIPE,    KC_LT,    KC_GT,  KC_LCBR,  KC_RCBR,                           KC_SLSH,     KC_7,     KC_8,     KC_9,   KC_ASTR,   _______,
-      _______,  KC_BSLS,  KC_SLSH,   KC_DOT,  KC_LPRN,  KC_RPRN,                            KC_EQL,     KC_4,     KC_5,     KC_6,   KC_PLUS,   _______,
-      _______,   KC_GRV,  KC_TILD,  _______,  KC_LBRC,  KC_RBRC,                              KC_0,     KC_1,     KC_2,     KC_3,   KC_PIPE,   _______,
-                                              _______,  _______, _______,         KC_DOT,  KC_COMM,    TG(4) 
+      _______,  KC_GRV,    KC_LT,    KC_GT,  KC_LCBR,  KC_RCBR,                           _______,  _______,  _______,  _______,   KC_PSCR,   _______,
+      _______,  KC_UNDS,  _______,  KC_COLN,  KC_LPRN,  KC_RPRN,                           KC_LEFT,  KC_DOWN,    KC_UP,  KC_RGHT,   _______,   _______,
+      _______,   KC_TILD,  KC_BSLS,  KC_SLSH,  KC_LBRC,  KC_RBRC,                           KC_HOME,  KC_PGDN,  KC_PGUP,   KC_END,   _______,   _______,
+                                              KC_SESC,  KC_STAB,   KC_DEL,        KC_DOT,  KC_COMM,   KC_ADJ 
   ),
 
   [_FKEYS] = LAYOUT_split_3x6_3(
-      _______,  _______,  _______,  _______,  _______,  _______,                            KC_F12,    KC_F7,    KC_F8,    KC_F9,   _______,   _______,
-      _______,  _______,  _______,  _______,  _______,  _______,                            KC_F11,    KC_F4,    KC_F5,    KC_F6,   _______,   _______,
-      _______,  _______,  _______,  _______,  _______,  _______,                            KC_F10,    KC_F1,    KC_F2,    KC_F3,   _______,   _______,
-                                               KC_ADJ,  _______, _______,        _______,  _______,   KC_ADJ
+      _______,  _______,  _______,  _______,  KC_MRWD,  KC_MFFD,                            KC_F12,    KC_F7,    KC_F8,    KC_F9,   _______,   _______,
+      _______,  _______,  KC_MPRV,  KC_MNXT,  KC_MPLY,  KC_MUTE,                            KC_F11,    KC_F4,    KC_F5,    KC_F6,   _______,   _______,
+      _______,  _______,  _______,  _______,  KC__VOLDOWN,  KC__VOLUP,                      KC_F10,    KC_F1,    KC_F2,    KC_F3,   _______,   _______,
+                                               KC_ADJ,  _______,  _______,       _______,  _______,   KC_ADJ
   ),
 
   [_ADJUST] = LAYOUT_split_3x6_3(
       XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                            KC_DF0,   KC_DF1,   KC_DF2,  XXXXXXX,   XXXXXXX,    KC_RST,
       KC_LTOG,  KC_LHUI,  KC_LSAI,  KC_LVAI,  XXXXXXX,  XXXXXXX,                           XXXXXXX,  CG_TOGG,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,
       KC_LMOD,  KC_LHUD,  KC_LSAD,  KC_LVAD,  XXXXXXX,  XXXXXXX,                           XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,   EEPROM_RESET,
-                                              _______,  _______, _______,        _______,  _______,  _______ 
+                                              _______,  _______,  _______,       _______,  _______,  _______ 
   )
 };
 
@@ -159,10 +166,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // }
 
 // KEY OVERRIDES
-const key_override_t cut_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_5ESC, KC_CUT);
+const key_override_t cut_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_4ESC, KC_CUT);
 const key_override_t copy_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_3TAB, KC_COP);
 const key_override_t paste_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_SBSPC, KC_PST);
-const key_override_t cut_override_mac = ko_make_basic(MOD_BIT(KC_LGUI), KC_5ESC, KC_CUT);
+const key_override_t cut_override_mac = ko_make_basic(MOD_BIT(KC_LGUI), KC_4ESC, KC_CUT);
 const key_override_t copy_override_mac = ko_make_basic(MOD_BIT(KC_LGUI), KC_3TAB, KC_COP);
 const key_override_t paste_override_mac = ko_make_basic(MOD_BIT(KC_LGUI), KC_SBSPC, KC_PST);
 
@@ -239,7 +246,6 @@ void update_log(void) {
 
 void render_keylogger_status(void) {
     oled_write_P(PSTR("     "), false);
-    oled_write_P(PSTR("KLogr"), false);
     oled_write(keylog_str, false);
 }
 
@@ -279,16 +285,14 @@ void render_layer_state(void) {
 }
 
 void render_keylock_status(uint8_t led_usb_state) {
-    oled_write_P(PSTR("Lock:"), false);
-    oled_write_P(PSTR(" "), false);
-    oled_write_P(PSTR("N"), led_usb_state & (1 << USB_LED_NUM_LOCK));
-    oled_write_P(PSTR("C"), led_usb_state & (1 << USB_LED_CAPS_LOCK));
-    oled_write_ln_P(PSTR("S"), led_usb_state & (1 << USB_LED_SCROLL_LOCK));
+    oled_write_P(PSTR("     "), false);
+    oled_write_P(PSTR("   "), false);
+    oled_write_P(PSTR("N"), numLock);
+    // oled_write_ln_P(PSTR("S"), led_usb_state & (1 << USB_LED_SCROLL_LOCK));
 }
 
 void render_mod_status(uint8_t modifiers) {
     oled_write_P(PSTR("     "), false);
-    oled_write_P(PSTR("Mods:"), false);
     oled_write_P(PSTR(" "), false);
     if (keymap_config.swap_lctl_lgui) {
       oled_write_P(PSTR("C"), (modifiers & MOD_MASK_CTRL));
@@ -302,6 +306,11 @@ void render_mod_status(uint8_t modifiers) {
       oled_write_P(PSTR("C"), (modifiers & MOD_MASK_CTRL));
       oled_write_P(PSTR("S"), (modifiers & MOD_MASK_SHIFT));
     }
+
+    oled_write_P(PSTR("     "), false);
+    oled_write_P(PSTR("  "), false);
+    oled_write_P(PSTR("N"), numLock);
+    oled_write_P(PSTR("  "), false);
 }
 
 void render_bootmagic_status(void) {
@@ -339,9 +348,8 @@ void render_status_main(void) {
     // render_default_layer_state();
     render_layer_state();
     render_mod_status(get_mods());
-
+    // render_keylock_status(host_keyboard_led_state());
     render_keylogger_status();
-
     render_bootmagic_status();
 }
 
@@ -375,6 +383,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_persistent_default_layer(2);
             }
             processNormally = false;
+            break;
+        case KC_3LOCK:
+            if (record->event.pressed) {
+                if (numLock) {
+                    layer_off(3);
+                    processNormally = false;
+                }
+
+                numLock = !numLock;
+            }
+            break;
+        case KC_3TAB:
+            if (!record->event.pressed) {
+                processNormally = !numLock;
+            }
             break;
     }
 
